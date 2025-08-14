@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo do Jogo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Resumo do Jogo</h2>
+            <div id="result"></div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jogador</th>
+                            <th>Pontos</th>
+                            <th>Acertos</th>
+                            <th>Erros</th>
+                            <th>Sem Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking-table-body">
+                        <!-- Preenchido pelo JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="index.html">
+                <button type="button">Novo Jogo</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const resultDiv = document.getElementById('result');
+        const rankingTableBody = document.getElementById('ranking-table-body');
+        const dados = JSON.parse(localStorage.getItem('quizResultado'));
+
+        if (dados) {
+            resultDiv.innerHTML = `
+                <p><strong>${dados.nome}</strong>, você fez <strong>${dados.pontuacao}</strong> pontos de 100!</p>
+                <p>Respostas corretas: ${dados.acertos}</p>
+                <p>Respostas erradas: ${dados.erros}</p>
+                <p>Perguntas sem resposta: ${dados.semResposta}</p>
+            `;
+
+            // Adiciona o jogador atual na tabela
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${dados.nome}</td>
+                <td>${dados.pontuacao}</td>
+                <td>${dados.acertos}</td>
+                <td>${dados.erros}</td>
+                <td>${dados.semResposta}</td>
+            `;
+            rankingTableBody.appendChild(row);
+        } else {
+            resultDiv.innerHTML = "<p>Nenhum resultado encontrado.</p>";
+        }
+    </script>
+</body>
+</html>
