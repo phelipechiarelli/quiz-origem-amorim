@@ -34,6 +34,16 @@
             </a>
         </div>
     </div>
+        <!-- Rodapé -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-title">Patrocínio</p>
+            <div class="footer-images">
+                <img src="img/SEIM.jpeg" alt="Logo 1">
+                <img src="img/SAVE_20250814_171931.jpg" alt="Logo 2">
+            </div>
+        </div>
+    </footer>
 
     <script>
         const resultDiv = document.getElementById('result');
@@ -41,12 +51,24 @@
         const dados = JSON.parse(localStorage.getItem('quizResultado'));
 
         if (dados) {
-            resultDiv.innerHTML = `
+            // Monta o resultado básico
+            let resultadoHTML = `
                 <p><strong>${dados.nome}</strong>, você fez <strong>${dados.pontuacao}</strong> pontos de 100!</p>
                 <p>Respostas corretas: ${dados.acertos}</p>
                 <p>Respostas erradas: ${dados.erros}</p>
                 <p>Perguntas sem resposta: ${dados.semResposta}</p>
             `;
+
+            // Se acertou todas as 10 perguntas
+            if (dados.acertos === 10) {
+                resultadoHTML += `
+                    <p style="color: gold; font-size: 1.2em; font-weight: bold; margin-top: 15px;">
+                        🏆🎉 Parabéns ${dados.nome}! Você é um mestre do conhecimento! 🎯🔥
+                    </p>
+                `;
+            }
+
+            resultDiv.innerHTML = resultadoHTML;
 
             // Adiciona o jogador atual na tabela
             const row = document.createElement('tr');
