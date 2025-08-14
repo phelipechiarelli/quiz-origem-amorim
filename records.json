@@ -1,14 +1,6 @@
 {
   "registros": [
-    {
-      "id": "ef79",
-      "nome": "João Silva",
-      "pontuacao": 70,
-      "acertos": 7,
-      "erros": 2,
-      "semResposta": 1,
-      "data": "2025-08-14T14:26:10.969Z"
-    }
+
   ],
   "id": "registros"
 }
